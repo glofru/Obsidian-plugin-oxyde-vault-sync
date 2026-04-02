@@ -1,12 +1,14 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "obsidian-oxyde-vault-sync",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "Sync your Obsidian vault with Oxyde Vault.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
-		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production && npm run copy-assets",
+		"copy-assets": "cp manifest.json build/oxyde-vault-sync/ && cp styles.css build/oxyde-vault-sync/ 2>/dev/null || true",
+		"local-test": "npm run build && cp -r build/oxyde-vault-sync \"$OBSIDIAN_VAULT/.obsidian/plugins/\"",
 		"version": "node version-bump.mjs && git add manifest.json versions.json",
 		"lint": "eslint ."
 	},

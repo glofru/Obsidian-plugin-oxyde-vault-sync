@@ -1,6 +1,9 @@
 import esbuild from "esbuild";
 import process from "process";
 import { builtinModules } from 'node:module';
+import { mkdirSync } from 'node:fs';
+
+mkdirSync("build/oxyde-vault-sync", { recursive: true });
 
 const banner =
 `/*
@@ -37,7 +40,7 @@ const context = await esbuild.context({
 	logLevel: "info",
 	sourcemap: prod ? false : "inline",
 	treeShaking: true,
-	outfile: "main.js",
+	outfile: "build/oxyde-vault-sync/main.js",
 	minify: prod,
 });
 
